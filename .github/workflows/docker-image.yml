@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag random-dad-joke:$(date +%s)
+    - name: Check out code
+      uses: actions/checkout@v4
+    - name: Build Docker image
+      # run: docker build . --file Dockerfile --tag random-dad-joke:$(date +%s)
+      run: docker build -t random-dad-joke .
+    - name: Run Docker container
+      run: docker run -d -p 8000:8000 random-dad-joke
