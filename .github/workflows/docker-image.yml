@@ -7,9 +7,7 @@ on:
 jobs:
 
   build-and-run:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Check out code
       uses: actions/checkout@v4
@@ -17,4 +15,6 @@ jobs:
       # run: docker build . --file Dockerfile --tag random-dad-joke:$(date +%s)
       run: docker build -t random-dad-joke .
     - name: Run Docker container
-      run: docker run -d -p 8000:8000 random-dad-joke
+      run: docker run -d -p 8080:8080 random-dad-joke
+    - name: Test python app
+      run: pytest -v

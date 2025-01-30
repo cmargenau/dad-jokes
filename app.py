@@ -18,7 +18,7 @@ jokes = [
 ]
 
 
-@app.route("/")
+@app.route("/",  methods=["GET"])
 def randomjoke():
     app.logger.debug("randomjoke(): enter")
 
