@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify, json
 import random
 
 app = Flask(__name__)
@@ -19,31 +19,22 @@ jokes = [
 
 
 @app.route("/",  methods=["GET"])
-def randomjoke():
-    app.logger.debug("randomjoke(): enter")
+def get_one_joke():
+    app.logger.debug("get_one_joke()")
+    return [random.choice(jokes)]
 
-    joke = random.choice(jokes)
-    question = joke["question"]
-    answer = joke["answer"]
-    return jsonify({'question': question, 'answer': answer})
 
-    # js = """
-    #     function toggleDiv() {
-    #       const div = document.getElementById('a');
-    #       if (div.style.display === "none") {
-    #         div.style.display = "block";
-    #       } else {
-    #         div.style.display = "none";
-    #       }}
-    # """
-    # html = "<html><body><script>" + js + "</script>"
-    # html += "<div style='font-size: 36px;'>"
-    # html += "<div><span id='q'>" + question + "</span>"
-    # html += "<button style='margin-left: 10px;' onclick='toggleDiv()'>Toggle Answer</button>"
-    # html += "<button style='margin-left: 5px;' onclick='location.reload()'>Next</button>"
-    # html += "</div><div id='a' style='margin: 20px 0 0 20px; display: none;'>" + answer + "</div>"
-    # html += "</div></body></html>"
-    # return html
+@app.route("/jokes/<int:number>",  methods=["GET"])
+def get_number_of_jokes(number):
+    app.logger.debug("get_number_of_jokes()")
+    return random.sample(jokes, number)
+
+
+@app.route("/jokes", methods=["GET"])
+@app.route("/jokes/", methods=["GET"])
+def get_all_jokes():
+    app.logger.debug("get_all_jokes()")
+    return jokes
 
 
 if __name__ == "__main__":
