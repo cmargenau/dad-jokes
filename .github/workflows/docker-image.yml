@@ -16,5 +16,5 @@ jobs:
       run: docker build -t dad-jokes .
 #    - name: Run Docker container
 #      run: docker run -d -p 8080:8080 dad-jokes
-#    - name: Test python app
-#      run: pytest -v
+    - name: Test python app
+      run: pytest -v
