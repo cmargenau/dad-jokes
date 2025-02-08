@@ -19,4 +19,4 @@ jobs:
     - name: Test python app
       run:
         pip install pytest
-        pytest app_test.py -v -s
+        pytest app_test.py -v
